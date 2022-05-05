@@ -1,26 +1,24 @@
 class Player
-  attr_reader :name, :symbol, :log, :winner
+  attr_reader :name, :symbol, :logs, :winner
 
   def initialize (name, symbol)
     @name = name
     @symbol = symbol
 
-    @log = []
+    @logs = []
     @winner = false
   end
 
   def make_move (posibilities)
-    @log.push(*posibilities)
-    @winner = am_i_a_winner
+    @logs.push(*posibilities)
+    @winner = is_winner?
   end
 
   private
 
-  def am_i_a_winner
-    @log.each do |position|
-      return true if @log.count(position) == 3
+  def is_winner?
+    @logs.any? do |log|
+      @logs.count(log) == 3
     end
-
-    false
   end
 end

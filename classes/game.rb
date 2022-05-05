@@ -18,18 +18,21 @@ class Game
       [0, 4, 8],
       [6, 4, 2]
     ]
+    @game_ended = false
 
-    @turn_of = random_initial_turn_of
+    @turn_of = choose_initial_turn
     @table = set_table
   end
 
   def start_game
-    i=0
-
-    while i<9 do
-      i+=1
-      choice_of_player
+ 
+    (0...9).each do |i|
+      print_table
+      break if @game_ended
+      require_for_move
     end
+
+    print_game_result
   end
 
   
@@ -44,7 +47,6 @@ class Game
       table += value + "\n" if [2, 5, 8].include?(index)
     end
 
-    puts(table)
     table
   end
   
@@ -53,7 +55,7 @@ class Game
     return @turn_of = 1
   end
 
-  def random_initial_turn_of
+  def choose_initial_turn
     rand(0..1)
   end
   
@@ -61,32 +63,42 @@ class Game
     index_of_posibilities = []
     @victory_combinations.each_with_index { |value, index| index_of_posibilities.push(index) if value.include?(position) }
     
-    puts("MWH: #{index_of_posibilities}")
     index_of_posibilities
   end
 
-  def choice_of_player
-    puts("\nWhat position do you want? #{players[@turn_of].name}")
+  def require_for_move
+    puts("\n#{players[@turn_of].name} what's your move?")
     position = gets.to_i
 
-    choice_of_player if verification_of_choice(position) == false
+    require_for_move if verify_choice(position) == false
   end
 
-  def verification_of_choice(position)
-    if @game_set[position] == '_'
-      @game_set[position] = players[@turn_of].symbol
-      players[@turn_of].make_move(find_posibilities(position))
-      @table = set_table
-      
-      change_turn
-      return true
+  def verify_choice(position)
+    if @game_set[position] != '_'
+      puts 'You select an ocupedd slot'
+      return false
     end
-      
-    puts('You select an ocupedd slot')
-    return false
+
+    @game_set[position] = players[@turn_of].symbol
+    players[@turn_of].make_move(find_posibilities(position))
+    @table = set_table
+    
+    @game_ended = check_winner?
+    @winner = [players[@turn_of].name, players[@turn_of].symbol] if @game_ended
+    change_turn
+    true
   end
 
-  def there_is_a_winner
-    puts("WINS!")
+  def check_winner?
+    players[@turn_of].winner
+  end
+
+  def print_table
+    puts(@table)
+  end
+
+  def  print_game_result
+    return puts("\nThere is a winner!!!!!\nCongrats #{@winner[0]} -- (#{@winner[1]})") if @game_ended
+    puts('Game is over, no winner :(') 
   end
 end

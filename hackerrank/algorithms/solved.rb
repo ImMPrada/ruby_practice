@@ -1,10 +1,12 @@
-#https://www.hackerrank.com/challenges/a-very-big-sum/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
-#https://www.hackerrank.com/challenges/diagonal-difference/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+# https://www.hackerrank.com/challenges/a-very-big-sum/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+# https://www.hackerrank.com/challenges/diagonal-difference/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+# https://www.hackerrank.com/challenges/mini-max-sum/problem?isFullScreen=true&h_r=next-challenge&h_v=zen
 
 class SolveProposed
 
   def aVeryBigSum(ar)
     # Write your code here
+    
     size_odd = ar.size.odd?
     size_to_cut = ar.size
     size_to_cut -= 1 if size_odd
@@ -20,6 +22,7 @@ class SolveProposed
 
   def diagonalDifference(arr)
     # Write your code here
+
     i_limit = arr.size  
     sum_diag_1 = 0
     sum_diag_2 = 0
@@ -30,5 +33,25 @@ class SolveProposed
     end
     
     (sum_diag_1-sum_diag_2).abs
-end
+  end
+
+  def staircase(n)
+    # Write your code here
+    
+    (1..n).each do |i|
+        line = ""
+        
+        (1..(n-i)).each { |c| line += " " }
+        (1..i).each { |c| line += "#" }
+        puts(line)
+    end
+  end
+
+  def miniMaxSum(arr)
+    # Write your code here
+
+    sorted_arr = arr.sort
+    
+    puts("#{sorted_arr[0..3].sum} #{sorted_arr[-4..-1].sum}")
+  end
 end

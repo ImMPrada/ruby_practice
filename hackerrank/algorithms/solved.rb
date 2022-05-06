@@ -6,7 +6,7 @@ class SolveProposed
 
   def aVeryBigSum(ar)
     # Write your code here
-    
+
     size_odd = ar.size.odd?
     size_to_cut = ar.size
     size_to_cut -= 1 if size_odd
@@ -53,5 +53,18 @@ class SolveProposed
     sorted_arr = arr.sort
     
     puts("#{sorted_arr[0..3].sum} #{sorted_arr[-4..-1].sum}")
+  enddef timeConversion(s)
+    # Write your code here
+    hours = s[0..1]
+    am_pm = s[-2..-1]
+    
+    if am_pm == "AM"
+       hours = "00" if hours.to_i == 12 
+    end
+    if am_pm == "PM"
+       hours = "#{hours.to_i + 12}" if hours != "12" 
+    end
+    
+    hours.to_s + s[2..7]
   end
 end

@@ -8,13 +8,14 @@ def cipher(s, gap)
 
   cipher = s.chars.reduce('')  do |s_cipher, letter|
     if letter == ' '
+
       s_cipher + letter
     else
 
       is_upper = false
       is_upper = true if /[[:upper:]]/.match(letter)
 
-      letter.downcase! if is_upper
+      letter = letter.downcase if is_upper
 
       letter_cipher = found[letter.to_sym]
       if !letter_cipher
@@ -23,9 +24,8 @@ def cipher(s, gap)
   
         letter_cipher = alphabet[index_cipher]
         found[letter.to_sym] = letter_cipher
-        puts(found)
       end
-      letter_cipher.upcase! if is_upper
+      letter_cipher = letter_cipher.upcase if is_upper
 
       s_cipher + letter_cipher
     end
@@ -35,3 +35,5 @@ def cipher(s, gap)
 end
 
 puts(cipher('Ey holaholaholaholaholahola e', 5))
+puts(cipher('Eeeeeeeeeeeeey holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola e', 5))
+puts(cipher('Ey hola como estas', 5))

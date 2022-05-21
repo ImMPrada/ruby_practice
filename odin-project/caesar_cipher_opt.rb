@@ -13,8 +13,8 @@ def cipher(s, gap)
     else
 
       is_upper = false
-      is_upper = true if /[[:upper:]]/.match(letter)
-
+      is_upper = true if letter.match(/[[:upper:]]/)
+      
       letter = letter.downcase if is_upper
 
       letter_cipher = found[letter.to_sym]

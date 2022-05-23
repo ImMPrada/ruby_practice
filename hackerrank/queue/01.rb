@@ -18,8 +18,8 @@ def resolve(list_of_instructions)
   response
 end
 
-file = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', '01_input.txt'))
-file_response_expected = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', '01_output.txt'))
+file = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', '02_input.txt'))
+file_response_expected = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', '02_output.txt'))
 
 i = 0
 size_expected = ''

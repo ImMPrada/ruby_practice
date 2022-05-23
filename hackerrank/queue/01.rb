@@ -18,32 +18,43 @@ def resolve(list_of_instructions)
   response
 end
 
-file = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', '02_input.txt'))
-file_response_expected = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', '02_output.txt'))
 
-i = 0
-size_expected = ''
-arr = []
-arr_results = []
-arr_expected = []
+hide_prints = true
 
-file.each do |line|
-  size_expected = line if i == 0
-  arr << line if i > 0 && line[-1] != "\n"
-  arr << line[0...-1] if i > 0 && line[-1] == "\n"
+['01', '02'].each do |name|
 
-  i += 1
+
+  file = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', "#{name}_input.txt"))
+  file_response_expected = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', "#{name}_output.txt"))
+  
+  i = 0
+  size_expected = ''
+  arr = []
+  arr_results = []
+  arr_expected = []
+  
+  file.each do |line|
+    size_expected = line if i == 0
+    arr << line if i > 0 && line[-1] != "\n"
+    arr << line[0...-1] if i > 0 && line[-1] == "\n"
+  
+    i += 1
+  end
+  
+  file_response_expected.each do |line|
+    arr_expected << line if line[-1] != "\n"
+    arr_expected << line[0...-1] if line[-1] == "\n"
+  end
+  
+  response = resolve(arr)
+  
+  unless hide_prints
+
+    response.each_with_index do |value, index|
+      puts("#{value} --- #{arr_expected[index]}")
+    end
+  end
+  
+  puts arr_expected == response
 end
 
-file_response_expected.each do |line|
-  arr_expected << line if line[-1] != "\n"
-  arr_expected << line[0...-1] if line[-1] == "\n"
-end
-
-response = resolve(arr)
-
-response.each_with_index do |value, index|
-  puts("#{value} --- #{arr_expected[index]}")
-end
-
-puts arr_expected == response

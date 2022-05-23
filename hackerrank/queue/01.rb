@@ -21,7 +21,7 @@ end
 
 hide_prints = true
 
-['01', '02'].each do |name|
+['01', '02', '03'].each do |name|
 
 
   file = File.open(File.join(Dir.home, 'Documents', 'PRACTICAS', 'ruby_practice', 'hackerrank', 'queue', 'test', '01', "#{name}_input.txt"))
